@@ -55,6 +55,8 @@ public class MovieManager {
         return movieArray;
     }
 
-    ;
+    public int getLimit() {
+        return limit;
+    }
 
 }
