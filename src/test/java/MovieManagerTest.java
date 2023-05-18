@@ -1,8 +1,11 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.opentest4j.AssertionFailedError;
 import ru.netology.stats.MovieManager;
 import ru.netology.stats.MoviePoster;
+
+import java.util.Arrays;
 
 
 public class MovieManagerTest {
@@ -25,6 +28,36 @@ public class MovieManagerTest {
     }
 
     @Test
+    public void arraysEqualTest() {
+        MoviePoster[] exp = new MoviePoster[]{
+                mp1,
+                mp2,
+                mp3,
+                mp4,
+                mp5,
+                mp6
+        };
+        Assertions.assertArrayEquals(exp, mm.getMovieArray());
+    }
+
+    @Test
+    public void arraysNotEqualTest() {
+        MoviePoster[] test = new MoviePoster[]{
+                mp1,
+                mp2,
+                mp3,
+                mp4,
+                mp5,
+                mp6,
+                mp6,
+                mp3,
+                mp4,
+                mp5
+        };
+        Assertions.assertNotEquals(Arrays.asList(test), Arrays.asList(mm.getMovieArray()));
+    }
+
+    @Test
     public void addNew() {
         int exp = 6;
 
@@ -36,11 +69,11 @@ public class MovieManagerTest {
 
     @Test
     public void notNull() {
-        Assertions.assertNotNull(mm);
+        Assertions.assertNotNull(mm.getMovieArray());
     }
 
     @Test
-    public void findAllMovieNameTest() {
+    public void findAllFirstMovieNameTest() {
         String exp = "Bladshot";
 
         String act = mm.findAll()[0].getMovieName();
@@ -50,7 +83,7 @@ public class MovieManagerTest {
     }
 
     @Test
-    public void findAllMovieGenreTest() {
+    public void findAllFirstMovieGenreTest() {
         String exp = "action";
 
         String act = mm.findAll()[0].getGenre();
